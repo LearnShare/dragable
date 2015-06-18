@@ -86,6 +86,9 @@ var Dragable = (function() {
         top = self.config.target.offsetTop
         || 0;
 
+    var leftBack = parseInt(left),
+        topBack = parseInt(top);
+
     left = left + x;
     top = top + y;
 
@@ -116,14 +119,21 @@ var Dragable = (function() {
     self.config.target.style.left = left + 'px';
     self.config.target.style.top = top + 'px';
 
-    if(self.config.onMove) {
+    var xMove = left - leftBack,
+        yMove = top - topBack;
+        
+    if(self.config.onMove
+        && (xMove
+          || yMove)) {
       self.config.onMove({
         x: left,
         maxX: self.parentRect.width
             - self.targetRect.width,
+        dx: xMove,
         y: top,
         maxY: self.parentRect.height
-            - self.targetRect.height
+            - self.targetRect.height,
+        dy: yMove
       });
     }
   };
