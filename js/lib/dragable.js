@@ -38,13 +38,13 @@ var Dragable = (function() {
       };
     }, false);
     // mousemove
-    self.config.target.addEventListener('mousemove', function(e) {
+    window.addEventListener('mousemove', function(e) {
       if(self.mousedown) {
         var dx = e.screenX - self.point.x,
             dy = e.screenY - self.point.y;
 
-        // self.move(dx, dy);
-        self.move(e.movementX, e.movementY);
+        self.move(dx, dy);
+        // self.move(e.movementX, e.movementY);
 
         self.point = {
           x: e.screenX,
@@ -53,12 +53,12 @@ var Dragable = (function() {
       }
     }, false);
     // mouseup
-    self.config.target.addEventListener('mouseup', function(e) {
+    window.addEventListener('mouseup', function(e) {
       self.mousedown = false;
     }, false);
     // mouseout
     self.config.target.addEventListener('mouseout', function(e) {
-      self.mousedown = false;
+      // self.mousedown = false;
     }, false);
   };
 
@@ -98,7 +98,6 @@ var Dragable = (function() {
         left = 0;
       }
       // top
-      // left
       if(self.targetRect.height
           + top
           > self.parentRect.height) {
