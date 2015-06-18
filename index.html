@@ -51,7 +51,11 @@
   <script>
     window.onload = function() {
       var dragable1 = new Dragable({
-        target: document.getElementById('dragable1')
+        target: document.getElementById('dragable1'),
+        inRect: true,
+        onMove: function(d) {
+          // console.log(d);
+        }
       });
 
       var dragable2 = new Dragable({

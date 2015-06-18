@@ -14,7 +14,11 @@ var Dragable = (function() {
       direction: config.direction
           || '',
       inRect: config.inRect
-          || false
+          || false,
+      onMove: (config.onMove
+          && typeof config.onMove == 'function')
+          ? config.onMove
+          : null
     };
 
     self.mousedown = false;
@@ -111,6 +115,17 @@ var Dragable = (function() {
 
     self.config.target.style.left = left + 'px';
     self.config.target.style.top = top + 'px';
+
+    if(self.config.onMove) {
+      self.config.onMove({
+        x: left,
+        maxX: self.parentRect.width
+            - self.targetRect.width,
+        y: top,
+        maxY: self.parentRect.height
+            - self.targetRect.height
+      });
+    }
   };
 
   return Dragable;
