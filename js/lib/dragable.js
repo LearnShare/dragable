@@ -31,19 +31,15 @@ var Dragable = (function() {
 
     // mousedown
     self.config.target.addEventListener('mousedown', function(e) {
-      // console.log('mousedown');
       self.mousedown = true;
       self.point = {
         x: e.screenX,
         y: e.screenY
       };
-      // console.log(self.point);
     }, false);
     // mousemove
     self.config.target.addEventListener('mousemove', function(e) {
       if(self.mousedown) {
-        // console.log('mousemove');
-        // console.log(e);
         var dx = e.screenX - self.point.x,
             dy = e.screenY - self.point.y;
 
@@ -54,19 +50,14 @@ var Dragable = (function() {
           x: e.screenX,
           y: e.screenY
         };
-        // console.log(self.point);
       }
     }, false);
     // mouseup
     self.config.target.addEventListener('mouseup', function(e) {
-      // console.log('mouseup');
-
       self.mousedown = false;
     }, false);
     // mouseout
     self.config.target.addEventListener('mouseout', function(e) {
-      // console.log('mouseout');
-
       self.mousedown = false;
     }, false);
   };
