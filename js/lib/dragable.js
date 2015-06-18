@@ -12,7 +12,9 @@ var Dragable = (function() {
       parent: config.parent
           || config.target.parentNode,
       direction: config.direction
-          || ''
+          || '',
+      inRect: config.inRect
+          || false
     };
 
     self.mousedown = false;
@@ -72,6 +74,9 @@ var Dragable = (function() {
   Dragable.prototype.move = function(dx, dy) {
     var self = this;
 
+    self.targetRect = self.config.target.getBoundingClientRect();
+    self.parentRect = self.config.parent.getBoundingClientRect();
+
     var x = dx,
         y = dy;
 
@@ -81,15 +86,41 @@ var Dragable = (function() {
       x = 0;
     }
 
-    console.log('move', x, y);
-
     var left = self.config.target.offsetLeft
         || 0,
         top = self.config.target.offsetTop
         || 0;
-    console.log(left, top);
-    self.config.target.style.left = (left + x) + 'px';
-    self.config.target.style.top = (top + y) + 'px';
+
+    left = left + x;
+    top = top + y;
+
+    // rect check
+    if(self.config.inRect) {
+      // left
+      if(self.targetRect.width
+          + left
+          > self.parentRect.width) {
+        left = self.parentRect.width
+            - self.targetRect.width;
+      }
+      if(left < 0) {
+        left = 0;
+      }
+      // top
+      // left
+      if(self.targetRect.height
+          + top
+          > self.parentRect.height) {
+        top = self.parentRect.height
+            - self.targetRect.height;
+      }
+      if(top < 0) {
+        top = 0;
+      }
+    }
+
+    self.config.target.style.left = left + 'px';
+    self.config.target.style.top = top + 'px';
   };
 
   return Dragable;

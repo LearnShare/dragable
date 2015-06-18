@@ -29,8 +29,8 @@
       height: 50px;
       border: solid 1px #CCF;
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 0;
+      left: 0;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -56,12 +56,14 @@
 
       var dragable2 = new Dragable({
         target: document.getElementById('dragable2'),
-        direction: 'x'
+        direction: 'x',
+        inRect: true
       });
 
       var dragable3 = new Dragable({
         target: document.getElementById('dragable3'),
-        direction: 'y'
+        direction: 'y',
+        inRect: true
       });
     };
   </script>
